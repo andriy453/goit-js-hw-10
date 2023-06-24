@@ -14,8 +14,9 @@
   margin-bottom: 20px;
 }
 .breed-select {
+    display: none;
   margin-bottom: 20px;
 }
 .error {
-  display: none;
+  display : none;
 }

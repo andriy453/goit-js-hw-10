@@ -7,17 +7,15 @@ const catInfoDiv = document.querySelector('div.cat-info');
 const loader = document.querySelector('p.loader');
 const error = document.querySelector('p.error');
 const catEl = document.querySelector('.cat');
-function hidenCat() {
-  return (catInfoDiv.style.display = 'none');
-}
-function showCat() {
-  return (catInfoDiv.style.display = 'block');
-}
+
 function hideLoader() {
-  return (loader.style.display = 'none');
+  return (loader.style.display = 'none',catInfoDiv.style.display = 'block');
 }
 function Loader() {
-  return (loader.style.display = 'block');
+  return (loader.style.display = 'block', catInfoDiv.style.display = 'none')
+}
+function vad() {
+  return breedSelect.style.display = 'block';
 }
 function populateBreedSelect(breeds) {
   breedSelect.innerHTML = breeds
@@ -42,13 +40,11 @@ function showCatInfo(cat) {
 
 function handleBreedSelect(event) {
     Loader();
-    hidenCat();
   setTimeout(() => {
     const breedId = event.target.value;
     fetchCatByBreed(breedId)
       .then(cat => {
         showCatInfo(cat);
-        showCat();
         hideLoader();
       })
       .catch(() => {
@@ -64,6 +60,7 @@ function init() {
   fetchBreeds()
     .then(breeds => {
       populateBreedSelect(breeds);
+      vad();
       breedSelect.addEventListener('change', handleBreedSelect);
       hideLoader();
     })
