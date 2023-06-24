@@ -6,7 +6,13 @@ const breedSelect = document.querySelector('select.breed-select');
 const catInfoDiv = document.querySelector('div.cat-info');
 const loader = document.querySelector('p.loader');
 const error = document.querySelector('p.error');
-
+const catEl = document.querySelector('.cat');
+function hidenCat() {
+  return (catInfoDiv.style.display = 'none');
+}
+function showCat() {
+  return (catInfoDiv.style.display = 'block');
+}
 function hideLoader() {
   return (loader.style.display = 'none');
 }
@@ -15,38 +21,40 @@ function Loader() {
 }
 function populateBreedSelect(breeds) {
   breedSelect.innerHTML = breeds
-    .map(breed => `<option value="${breed.id}">${breed.name}</option>`)
+    .map(breed => `<option value="${breed.id}" >${breed.name}</option>`)
     .join('');
 }
 function showCatInfo(cat) {
   const { name, description, temperament } = cat[0].breeds[0];
 
-  const catInfoHTML = `
-  <img class="img-cat" src="${cat[0].url}" alt="Cat Image"> 
+  const catInfoHTML = `<div class="cat">
+   <img loading="eager" class="img-cat " src="${cat[0].url}" alt="Cat Image"> 
     <div class="cat-conteiner">
     <h2>${name}</h2>
     <p><strong>Description:</strong> ${description}</p>
     <p><strong>Temperament:</strong> ${temperament}</p>
     </div>
+     </div>
   `;
 
   catInfoDiv.innerHTML = catInfoHTML;
 }
 
 function handleBreedSelect(event) {
+    Loader();
+    hidenCat();
   setTimeout(() => {
     const breedId = event.target.value;
     fetchCatByBreed(breedId)
       .then(cat => {
-        Loader();
         showCatInfo(cat);
+        showCat();
         hideLoader();
       })
       .catch(() => {
         showError();
-      })
-      
-  }, 500);
+      });
+  }, 1000);
 }
 
 function showError() {
@@ -62,7 +70,6 @@ function init() {
     .catch(() => {
       showError();
     });
-    
 }
 
 init();
