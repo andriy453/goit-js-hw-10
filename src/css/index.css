@@ -1,0 +1,21 @@
+.cat-info {
+  display: flex;
+  gap: 0px 30px;
+}
+.img-cat {
+  width: 500px;
+  height: 400px;
+}
+.cat-conteiner {
+  display: flex;
+  flex-direction: column;
+}
+.breed-select {
+  margin-bottom: 20px;
+}
+.breed-select {
+  margin-bottom: 20px;
+}
+.error {
+  display: none;
+}
